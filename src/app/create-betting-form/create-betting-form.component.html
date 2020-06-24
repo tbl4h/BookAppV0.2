@@ -1,0 +1,87 @@
+<form [formGroup]="betingForkForm" novalidate >
+
+    <fieldset formGroupName="requiredField">
+        <div class="form-group" [ngClass]="{
+                    'correct':startingValue.valid  && (startingValue.touched || startingValue.dirty),
+                    'incorrect':startingValue.invalid  && (startingValue.touched || startingValue.dirty)}">
+            <label>Starting value in units</label>
+            <input type="number" class="form-control" formControlName="startingValue">
+            <div class="form-control-feedback"
+                *ngIf="startingValue.errors && (startingValue.touched || startingValue.dirty)">
+                <p *ngIf="startingValue.errors.max">
+                    Starting value is to high.
+                </p>
+                <p *ngIf="startingValue.errors.min">
+                    Starting value is to low.
+                </p>
+                <p *ngIf="startingValue.errors.required">
+                    Starting value is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{
+                'correct':expectedValue.valid && (expectedValue.touched || expectedValue.dirty),
+                'incorrect':expectedValue.invalid && (expectedValue.touched || expectedValue.dirty)}">
+            <label>Expected value</label>
+            <input type="number" class="form-control" formControlName="expectedValue">
+            <div class="form-control-feedback"
+                *ngIf="expectedValue.errors && (expectedValue.touched || expectedValue.dirty)">
+                <p *ngIf="expectedValue.errors.max">
+                    Expected value is to high.
+                </p>
+                <p *ngIf="expectedValue.errors.min">
+                    Expeced value is to low.
+                </p>
+                <p *ngIf="expectedValue.errors.requred">
+                    Expected value is requred.
+                </p>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="form-group">
+        <label>Advanced Options</label>
+        <input type="checkbox" formControlName="formAdvanced">
+    </div>
+
+    <fieldset formGroupName="advancedOptions" *ngIf="formAdvanced.value === true">
+        <div class="form-group" [ngClass]="{
+        'correct':minProbability.valid,
+        'incorrect':minProbability.invalid}">
+            <label>Min probability per combination</label>
+            <input type="number" class="form-control" formControlName="minProbability">
+            <div class="form-control-feedback"
+                *ngIf="minProbability.errors && (minProbability.touched || minProbability.dirty)">
+                <p *ngIf="minProbability.errors.min">
+                    Min probability is to low.
+                </p>
+                <p *ngIf="minProbability.errors.max">
+                    Min probability is to high.
+                </p>
+                <p *ngIf="minProbability.errors.required">
+                    Min probability is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{
+        'correct':minProfit.valid,
+        'incorrect':minProfit.invalid}">
+            <label>Min profit per unit to combination</label>
+            <input type="number" class="form-control" formControlName="minProfit">
+            <div class="form-control-feedback" *ngIf="minProfit.errors && (minProfit.touched || minProfit.dirty)">
+                <p *ngIf="minProfit.errors.min">
+                    Min profit is to low.
+                </p>
+                <p *ngIf="minProfit.errors.max">
+                    Min profit is to high.
+                </p>
+                <p *ngIf="minProfit.errors.required">
+                    Min profit is required.
+                </p>
+            </div>
+        </div>
+    </fieldset>
+    <button type="submit" [disabled]="betingForkForm.pristine || betingForkForm.invalid " (click)="addFork()">Add Fork</button>
+</form>

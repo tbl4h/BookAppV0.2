@@ -1,0 +1,20 @@
+<table>
+    <thead>
+      <th>Starting Value</th>
+      <th>Expected Value</th>
+      <th>Min Probability</th>
+      <th>Min Profit</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fork of forks">
+  
+        <td>{{fork.startingValue}}</td>
+        <td>{{fork.expectedValue}}</td>
+        <td>{{fork.minProbability}}</td>
+        <td>{{fork.minProfit}}</td>
+        <td>
+            <button (click)="delete(fork.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
