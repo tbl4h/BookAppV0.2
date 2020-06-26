@@ -1,7 +1,10 @@
-import { Fork } from './../fork.model';
-import { ForkService } from './../fork.service';
+import { AlertComponent } from './../alert/alert.component';
+import { AlertService } from 'src/app/_services/alert.service';
+import { Fork } from '../../_models/fork.model';
+import { ForkService } from '../../_services/fork.service';
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { FormControl, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-create-betting-form',
   templateUrl: './create-betting-form.component.html',
@@ -17,7 +20,7 @@ export class CreateBettingFormComponent implements OnInit, OnChanges {
   formAdvanced: FormControl;
   lp = 0;
 
-  constructor(private forkService: ForkService) { }
+  constructor(private forkService: ForkService, private alertService: AlertService) { }
 
 
   ngOnInit(): void {
@@ -79,7 +82,8 @@ export class CreateBettingFormComponent implements OnInit, OnChanges {
     let tmpFork: Fork;
     tmpFork = new Fork(
       this.forkService.getId(), this.startingValue.value, this.expectedValue.value, this.minProbability.value, this.minProfit.value
-      );
+    );
     this.forkService.createFork(tmpFork);
+    this.alertService.success('Add Fork to ForksList !', { autoClose: true });
   }
 }

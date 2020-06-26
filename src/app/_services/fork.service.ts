@@ -1,4 +1,4 @@
-import { Fork } from './fork.model';
+import { Fork } from '../_models/fork.model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 

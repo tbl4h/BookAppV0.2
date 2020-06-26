@@ -1,17 +1,20 @@
-import { ForkService } from './../fork.service';
-import { Fork } from './../fork.model';
+import { AlertService } from 'src/app/_services/alert.service';
+import { AlertComponent } from './../alert/alert.component';
+import { ForkService } from '../../_services/fork.service';
+import { Fork } from '../../_models/fork.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-fork-list',
   templateUrl: './fork-list.component.html',
-  styleUrls: ['./fork-list.component.css']
+  styleUrls: ['./fork-list.component.css'],
+  providers: [AlertService]
 })
 export class ForkListComponent implements OnInit {
 
   forks: Fork[];
 
-  constructor(private forkService: ForkService) { }
+  constructor(private forkService: ForkService, private alertSevice: AlertService) { }
 
   ngOnInit() {
     this.forkService.getForks().subscribe(data => {
@@ -37,6 +40,7 @@ export class ForkListComponent implements OnInit {
 
   delete(id: string) {
     this.forkService.deleteFork(id);
+    this.alertSevice.success('Fork ' + id + 'was deleted !', { autoClose: true });
   }
 
 }
