@@ -12,4 +12,5 @@ export class Fork {
         this.minProbability = _minProbability;
         this.minProfit = _minProfit;
     }
+
 }

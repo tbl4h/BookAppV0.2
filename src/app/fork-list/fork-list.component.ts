@@ -16,10 +16,13 @@ export class ForkListComponent implements OnInit {
   ngOnInit() {
     this.forkService.getForks().subscribe(data => {
       this.forks = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data() as object
+        console.log(e.payload.doc.id + '\n Data: ');
+        console.log(e.payload.doc.data() as Fork);
+        let tmpFork = {
+          ...(e.payload.doc.data() as object),
         } as Fork;
+        tmpFork.id = e.payload.doc.id;
+        return tmpFork;
       });
     });
   }
@@ -29,7 +32,7 @@ export class ForkListComponent implements OnInit {
   }
 
   update(fork: Fork) {
-    this.forkService.updateFork(fork);
+    console.log(fork);
   }
 
   delete(id: string) {

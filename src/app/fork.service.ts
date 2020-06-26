@@ -10,13 +10,12 @@ export class ForkService {
   constructor(private firestore: AngularFirestore) {
 
   }
-
   getForks() {
     return this.firestore.collection('Forks').snapshotChanges();
   }
 
   createFork(fork: Fork) {
-    return this.firestore.collection('Forks').add({...fork});
+    this.firestore.collection('Forks').doc(fork.id).set(Object.assign({}, fork));
   }
 
   updateFork(fork: Fork) {
@@ -24,6 +23,11 @@ export class ForkService {
     this.firestore.doc('Forks/' + fork.id).update(fork);
   }
   deleteFork(forkId: string) {
-    this.firestore.doc('Forks/' + forkId).delete();
+    console.log(forkId);
+
+    this.firestore.collection('Forks/').doc(forkId).delete();
+  }
+  getId(): string {
+    return this.firestore.createId();
   }
 }

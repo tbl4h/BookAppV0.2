@@ -8,7 +8,7 @@ import { FormControl, Validators, FormGroup, ReactiveFormsModule } from '@angula
   styleUrls: ['./create-betting-form.component.css']
 })
 export class CreateBettingFormComponent implements OnInit, OnChanges {
-  
+
   betingForkForm: FormGroup;
   startingValue: FormControl;
   expectedValue: FormControl;
@@ -16,7 +16,7 @@ export class CreateBettingFormComponent implements OnInit, OnChanges {
   minProfit: FormControl;
   formAdvanced: FormControl;
   lp = 0;
-  
+
   constructor(private forkService: ForkService) { }
 
 
@@ -37,7 +37,7 @@ export class CreateBettingFormComponent implements OnInit, OnChanges {
     this.minProbability = new FormControl(null,
       [Validators.min(1), Validators.max(100)]);
     this.minProfit = new FormControl(null,
-       [Validators.min(1), Validators.max(100)]);
+      [Validators.min(1), Validators.max(100)]);
   }
 
   createForm() {
@@ -74,15 +74,12 @@ export class CreateBettingFormComponent implements OnInit, OnChanges {
       }
     });
   }
-  upLp(): string {
-    let _lp = '';
-    this.lp++;
-    return _lp = this.lp.toString();
-  }
-  addFork(){
-    let tmpFork : Fork;
-    tmpFork = new Fork(this.upLp(), this.startingValue.value, this.expectedValue.value, this.minProbability.value,this.minProfit.value);
+
+  addFork() {
+    let tmpFork: Fork;
+    tmpFork = new Fork(
+      this.forkService.getId(), this.startingValue.value, this.expectedValue.value, this.minProbability.value, this.minProfit.value
+      );
     this.forkService.createFork(tmpFork);
-    console.log("addFork fire");
   }
 }
