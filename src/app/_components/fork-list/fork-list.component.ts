@@ -40,7 +40,7 @@ export class ForkListComponent implements OnInit {
 
   delete(id: string) {
     this.forkService.deleteFork(id);
-    this.alertSevice.success('Fork ' + id + 'was deleted !', { autoClose: true });
+    this.alertSevice.success('Fork ' + id + ' was deleted !', { autoClose: true });
   }
 
 }
